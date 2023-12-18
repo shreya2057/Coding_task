@@ -16,7 +16,7 @@ const Textfield = ({label, type, placeholder, pattern, id, required, onChangeMet
                 type={type}
                 autoComplete="off" 
                 id={id} 
-                className="border-b text-gray-500 border-gray-300 w-96 focus:outline-none focus:border-gray-400 p-2 my-1"
+                className="border-b text-gray-500 border-gray-300 md:w-96 w-50 focus:outline-none focus:border-gray-400 p-2 my-1"
                 placeholder={placeholder}
                 onChange={onChangeMethod}
             />

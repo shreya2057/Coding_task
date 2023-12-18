@@ -23,9 +23,9 @@ const Edit = ()=>{
         <div className="flex flex-col h-screen">
         <NavBar/>
         <div className="flex flex-row h-full">
-            <img src={CoverImage} className="flex"/>
+            <img src={CoverImage} className="lg:flex hidden"/>
             <div className="flex flex-1 flex-col items-center mt-2">
-                <form className="py-3 px-10 rounded-md border-2 border-gray-100 shadow-md">
+                <form className="md:py-3 md:px-10 rounded-md border-2 border-gray-100 shadow-md">
                     <Textfield
                         label={"Name"}
                         type={"text"}
