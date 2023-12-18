@@ -4,7 +4,7 @@ import {
     Route 
 } from "react-router-dom";
 import App from "../App";
-import Register from "../screen/Register";
+import Edit from "../screen/Edit";
 
 const AppRouter = ()=>{
     return (
@@ -12,7 +12,7 @@ const AppRouter = ()=>{
             <Router>
                 <Routes>
                     <Route path="/" element={<App/>}/>
-                    <Route path="register" element={<Register/>}/>
+                    <Route path="edit" element={<Edit/>}/>
                 </Routes>
             </Router>
         </>
