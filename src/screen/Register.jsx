@@ -2,6 +2,7 @@ import CoverImage from "../app-images/register.jpg";
 import Button from "../components/Button";
 import DropDown from "../components/DropDown";
 import LocationTextField from "../components/LocationTextfield";
+import NavBar from "../components/Navbar";
 import Textfield from "../components/Textfield";
 import { useState } from "react";
 
@@ -20,7 +21,7 @@ const Register = ()=>{
     }
     return (
         <div className="flex flex-col h-screen">
-        {/* <NavBar/> */}
+        <NavBar/>
         <div className="flex flex-row h-full">
             <img src={CoverImage} className="flex"/>
             <div className="flex flex-1 flex-col items-center mt-2">
