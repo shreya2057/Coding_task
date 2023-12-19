@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
 import NavBar from "../../components/Navbar";
-import Register from "./HomeComponents/Register";
-import Table from "./HomeComponents/Table";
+import Register from "./components/Register";
+import Table from "./components/Table";
 import { useEffect, useState } from "react";
 
 const Home = ()=>{

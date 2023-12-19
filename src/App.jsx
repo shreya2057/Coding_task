@@ -1,4 +1,4 @@
-import Home from "./screen/HomeScreen/Home";
+import Home from "./screen/home/Home";
 
 const App = ()=> {
   return (
