@@ -6,15 +6,27 @@ import LocationTextField from "../components/LocationTextfield";
 import NavBar from "../components/Navbar";
 import Textfield from "../components/Textfield";
 import { useState } from "react";
+
+import { message } from "antd";
 import { useDispatch } from "react-redux";
 import { updateUser } from "../redux/reducers";
 import { updateUserData } from "../services/crud";
+import userSchema from "../services/form_validation/userSchema";
 
 const Edit = ()=>{
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const location = useLocation();
     const user = location.state;
+    const [messageApi, contextHolder] = message.useMessage();
+    const openMessage = (type, content) => {
+        messageApi.open({
+            key: 'updatable',
+            type: type,
+            content: content,
+            duration: 1.5
+        });
+    };
     const [userData, setUserData] = useState({
         id: user.id,
         name: user.name,
@@ -45,12 +57,19 @@ const Edit = ()=>{
 
     const submit = (event)=>{
         event.preventDefault();
-        const users = updateUserData(userData, user.id)
-        dispatch(updateUser(userData));
-        navigate('/');
+        userSchema.validate(userData)
+        .then(
+            response=>{
+                const users = updateUserData(userData, user.id);
+                dispatch(updateUser({userData})); 
+                navigate('/');
+            })
+        .catch(error=>openMessage("error", error.message));
+        
     }
     return (
         <div className="flex flex-col h-screen">
+            {contextHolder}
             <NavBar/>
             <div className="flex flex-row h-full">
                 <img src={CoverImage} className="lg:flex hidden"/>
