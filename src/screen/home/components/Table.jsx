@@ -1,17 +1,27 @@
 import { useDispatch } from "react-redux";
+import { SortAscendingOutlined } from "@ant-design/icons"
 import Button from "../../../components/Button";
 import { currentUser } from "../../../redux/reducers";
 import { useNavigate } from "react-router-dom";
 
-const Table = ({userData, deleteMethod})=>{
+const Table = ({userData, sorting, deleteMethod})=>{
     const dispatch = useDispatch();
     const navigate = useNavigate();
     return(
         <table className="flex flex-col my-2 mx-12 justify-center">
-            
             <thead >
                 <tr className="table_header">
-                    <td className="left_cell">Name</td>
+                    <td className="left_cell">
+                        <div className="flex justify-between">
+                            <span>Name</span>
+                            <button 
+                                className="text-lg"
+                                onClick={sorting}
+                            >
+                                <SortAscendingOutlined className="self-center"/>
+                            </button>
+                        </div>
+                    </td>
                     <td className="right_cell">Action buttons</td>
                 </tr>
             </thead>

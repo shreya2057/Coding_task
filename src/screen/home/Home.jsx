@@ -16,6 +16,14 @@ const Home = ()=>{
     const [users, setUsers] = useState();
     const [modal_visible,setVisible] = useState(false);
     const navigate = useNavigate();
+    const sorting = ()=>{
+        if(users){
+            const sorted_data = users.slice().sort((a, b) => a.name.localeCompare(b.name))
+            setUsers(sorted_data);
+            console.log(sorted_data);
+        }
+        console.log(sorting);
+    }
     const deleteData = async()=>{
         const updatedData = await deleteUserData(users, id)
         dispatch(deleteUser(updatedData));
@@ -36,6 +44,7 @@ const Home = ()=>{
                 <div className="flex flex-col justify-center items-end">
                     <Table 
                         userData={users} 
+                        sorting={sorting}
                         deleteMethod={()=>{setVisible(true)}}/>
                     <div className="mx-12 my-3">
                         <Button 
