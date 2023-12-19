@@ -1,38 +1,45 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { useState } from "react";
+import { createUser} from "../../../redux/reducers";
+import { createUserData } from "../../../services/crud";
 import Button from "../../../components/Button";
 import DropDown from "../../../components/DropDown";
 import LocationTextField from "../../../components/LocationTextfield";
 import Textfield from "../../../components/Textfield";
-import { useState } from "react";
-import { createUser, user_reducer } from "../../../redux/reducers";
-import { createUserData } from "../../../services/crud";
 
 const Register = ()=>{
-    const [name, setName] = useState("");
-    const [email, setEmail] = useState("");
-    const [phoneNo, setPhoneNo] = useState("");
-    const [dob, setDOB] = useState("");
-    const [city, setCity] = useState("");
-    const [district, setDistrict] = useState("");
-    const [province, setProvince] = useState("");
-    const [country, setCountry] = useState("Nepal");
-    const state = useSelector((state)=>state.user_reducer.user);
     const dispatch = useDispatch();
+    const [userData, setUserData] = useState({
+        id: Math.round(Math.random() * 100),
+        name: "",
+        email: "",
+        phoneNo: "",
+        dob: "",
+        address: {
+            city: "",
+            district: "",
+            province: "",
+            country: "Nepal"
+        }
+    });
+
+    const setFormData = (field_name, value)=>{
+        setUserData({ ...userData,[field_name]: value});
+    }
+
+    const setAddressFormData = (field_name, value)=>{
+        setUserData({
+            ...userData, 
+            address: {
+                ...userData.address,
+                [field_name]: value
+            }
+        });
+    }
+    
     const submit = async(event)=>{
         event.preventDefault();
-        const userData = {
-            id: Math.round(Math.random() * 100),
-            name: name,
-            email: email, 
-            phoneNo: phoneNo,
-            dob: dob,
-            address: {
-                city: city,
-                district: district,
-                province: province,
-                country: country
-            }
-        };
+        console.log(userData)
         const users = await createUserData(userData);
         dispatch(createUser(userData));
     }
@@ -45,7 +52,7 @@ const Register = ()=>{
                     placeholder={"Enter your full name"}
                     id={"name"}
                     required={true}
-                    onChangeMethod={(event)=>{setName(event.target.value)}}
+                    onChangeMethod={(event)=>setFormData("name", event.target.value)}
                 />
                 <Textfield
                     label={"Email"}
@@ -53,7 +60,7 @@ const Register = ()=>{
                     placeholder={"Enter your email"}
                     id={"email"}
                     required={true}
-                    onChangeMethod={(event)=>{setEmail(event.target.value)}}
+                    onChangeMethod={(event)=>{setFormData("email", event.target.value)}}
                 />
                 <Textfield
                     label={"Phone Number"}
@@ -61,14 +68,14 @@ const Register = ()=>{
                     placeholder={"Enter your phone number"}
                     id={"phoneNo"}
                     required={true}
-                    onChangeMethod={(event)=>{setPhoneNo(event.target.value)}}
+                    onChangeMethod={(event)=>{setFormData("phoneNo", event.target.value)}}
                 />
                 <Textfield
                     label={"DOB (AD)"}
                     type={"date"}
                     id={"dob"}
                     required={false}
-                    onChangeMethod={(event)=>{setDOB(event.target.value)}}
+                    onChangeMethod={(event)=>{setFormData("dob", event.target.value)}}
                 />
                 <div className="m-2">
                     <label className="text-lg font-medium">
@@ -79,13 +86,13 @@ const Register = ()=>{
                             label={"City"} 
                             id={"city"} 
                             placeholder={"City Name"}
-                            onChangeMethod={(event)=>setCity(event.target.value)}
+                            onChangeMethod={(event)=>setAddressFormData("city",event.target.value)}
                         />
                         <LocationTextField 
                             label={"District"} 
                             id={"district"} 
                             placeholder={"District Name"}
-                            onChangeMethod={(event)=>setDistrict(event.target.value)}
+                            onChangeMethod={(event)=>setAddressFormData("district", event.target.value)}
                         />
                     </div>
                     <div className="flex flex-row justify-between">
@@ -93,14 +100,14 @@ const Register = ()=>{
                             label={"State"} 
                             id={"state"} 
                             placeholder={"--State"}
-                            onChangeMethod={(event)=>setProvince(event.target.value)}
+                            onChangeMethod={(event)=>setAddressFormData("province",event.target.value)}
                         />
                         <LocationTextField 
                             label={"Country"} 
                             id={"country"} 
                             placeholder={"Country Name"} 
-                            value={country}
-                            onChangeMethod={(event)=> setCountry(event.target.value)}
+                            value={userData.address.country}
+                            onChangeMethod={(event)=> setAddressFormData("country", event.target.value)}
                         />
                     </div>
                 </div>
