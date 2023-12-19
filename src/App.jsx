@@ -1,9 +1,9 @@
-import Register from "./screen/Register";
+import Home from "./screen/Home";
 
 const App = ()=> {
   return (
     <>
-      <Register/>
+      <Home/>
     </>
   );
 };

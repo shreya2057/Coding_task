@@ -1,13 +1,11 @@
-const Button = ({label, method}) =>{
+const Button = ({label, method, bg_color, border_color}) =>{
     return (
-        <div className="flex w-full justify-center mt-4 mb-1">
-            <button 
-                onClick={method}
-                className="py-1 px-5 border border-[#10b981] bg-[#86efac] rounded-md"
-            >
-                {label}
-            </button>
-        </div>
+        <button 
+            onClick={method}
+            className ={`py-1 px-5 border ${bg_color} ${border_color} text-sm rounded-md m-0`}
+        >
+            {label}
+        </button>
     );
 };
 

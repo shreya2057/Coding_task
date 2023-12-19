@@ -1,3 +1,18 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+    .table_header{
+        @apply h-10 items-center bg-[#bbf7d0] text-lg font-bold rounded-t-sm border-b border-gray-300;
+    }
+    .table_body{
+        @apply h-10 border-b border-gray-300;
+    }
+    .left_cell{
+        @apply w-64 px-4;
+    }
+    .right_cell{
+        @apply w-64 text-end px-4;
+    }
+}
