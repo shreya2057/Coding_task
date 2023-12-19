@@ -20,9 +20,7 @@ const Home = ()=>{
         if(users){
             const sorted_data = users.slice().sort((a, b) => a.name.localeCompare(b.name))
             setUsers(sorted_data);
-            console.log(sorted_data);
         }
-        console.log(sorting);
     }
     const deleteData = async()=>{
         const updatedData = await deleteUserData(users, id)
