@@ -1,4 +1,4 @@
-const Textfield = ({label, type, placeholder, pattern, id, required, onChangeMethod, value})=>{
+const Textfield = ({label, type, placeholder, id, required, onChangeMethod, value})=>{
     return (
         <div className="flex flex-col p-2">
             <label 

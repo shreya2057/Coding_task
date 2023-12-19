@@ -1,14 +1,27 @@
 import { useDispatch } from "react-redux";
 import { useState } from "react";
+import { message } from "antd";
 import { createUser} from "../../../redux/reducers";
 import { createUserData } from "../../../services/crud";
 import Button from "../../../components/Button";
 import DropDown from "../../../components/DropDown";
 import LocationTextField from "../../../components/LocationTextfield";
 import Textfield from "../../../components/Textfield";
+import userSchema from "../../../services/form_validation/userSchema";
 
 const Register = ()=>{
     const dispatch = useDispatch();
+    const [messageApi, contextHolder] = message.useMessage();
+
+    const openMessage = (type, content) => {
+        messageApi.open({
+            key: 'updatable',
+            type: type,
+            content: content,
+            duration: 1.5
+        });
+    };
+
     const [userData, setUserData] = useState({
         id: Math.round(Math.random() * 100),
         name: "",
@@ -37,13 +50,21 @@ const Register = ()=>{
         });
     }
     
-    const submit = async(event)=>{
+    const submit = (event)=>{
         event.preventDefault();
-        const users = await createUserData(userData);
-        dispatch(createUser(userData));
+        userSchema.validate(userData)
+        .then(
+            response=>{
+                console.log(response);
+                createUserData(userData);
+                dispatch(createUser(userData));
+            })
+        .catch(error=>openMessage("error", error.message));
+        
     }
     return (
         <div className="flex flex-1 flex-col items-center mt-2">
+            {contextHolder}
             <form className="py-3 px-10 rounded-md border-2 border-gray-100 shadow-md">
                 <Textfield
                     label={"Name"}
