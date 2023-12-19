@@ -39,7 +39,6 @@ const Register = ()=>{
     
     const submit = async(event)=>{
         event.preventDefault();
-        console.log(userData)
         const users = await createUserData(userData);
         dispatch(createUser(userData));
     }

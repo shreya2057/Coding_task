@@ -1,10 +1,7 @@
-import validator from "validator";
 export const validateField = (data) => {
     var error = null;
-    if(validator){
-        if(validator.isEmpty){
-            console.log("Empty")
-        }
+    if(data.name===null){
+        error = 
     }
     
     console.log(data);
