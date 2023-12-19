@@ -27,6 +27,13 @@ const Edit = ()=>{
             duration: 1.5
         });
     };
+
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = today.getMonth() + 1;
+    const day = today.getDate();
+    const max_date = `${year}-${month < 10 ? '0' + month : month}-${day < 10 ? '0' + day : day}`;
+
     const [userData, setUserData] = useState({
         id: user.id,
         name: user.name,
@@ -107,6 +114,7 @@ const Edit = ()=>{
                             type={"date"}
                             id={"dob"}
                             required={false}
+                            max={max_date}
                             value={userData.dob}
                             onChangeMethod={(event)=>{setFormData("dob",event.target.value)}}
                         />

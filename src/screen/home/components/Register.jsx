@@ -14,6 +14,13 @@ const Register = ()=>{
     const dispatch = useDispatch();
     const [messageApi, contextHolder] = message.useMessage();
 
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = today.getMonth() + 1;
+    const day = today.getDate();
+    const max_date = `${year}-${month < 10 ? '0' + month : month}-${day < 10 ? '0' + day : day}`;
+    
+
     const openMessage = (type, content) => {
         messageApi.open({
             key: 'updatable',
@@ -101,6 +108,7 @@ const Register = ()=>{
                     type={"date"}
                     id={"dob"}
                     required={false}
+                    max={max_date}
                     value={userData.dob}
                     onChangeMethod={(event)=>{setFormData("dob", event.target.value)}}
                 />

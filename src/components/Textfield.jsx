@@ -1,4 +1,4 @@
-const Textfield = ({label, type, placeholder, id, required, onChangeMethod, value})=>{
+const Textfield = ({label, type, placeholder, id, required, onChangeMethod, value, max})=>{
     return (
         <div className="flex flex-col p-2">
             <label 
@@ -15,6 +15,7 @@ const Textfield = ({label, type, placeholder, id, required, onChangeMethod, valu
             <input 
                 type={type}
                 value={value}
+                max={max}
                 autoComplete="off" 
                 id={id} 
                 className="border-b text-gray-500 border-gray-300 md:w-96 w-50 focus:outline-none focus:border-gray-400 p-2 my-1"
