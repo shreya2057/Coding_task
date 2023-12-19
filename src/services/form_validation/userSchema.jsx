@@ -1,4 +1,4 @@
-import {date, object, string} from "yup";
+import {date, mixed, object, string} from "yup";
 
 const userSchema = object({
     name: string()
@@ -9,7 +9,6 @@ const userSchema = object({
             .matches(/^[0-9]+$/, 'Phone number must contain digits only')
             .required("Phone number is required field")
             .min(7, "Phone number should contain atleast 7 digits"),
-    dob: date().max(new Date(), 'DOB must be less than or equal to today'),
     address: object({
         city: string()
             .matches(/^[a-zA-Z]*$/, 'City must contain alphabets only'),

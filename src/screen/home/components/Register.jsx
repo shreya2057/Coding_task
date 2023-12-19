@@ -1,6 +1,7 @@
 import { useDispatch } from "react-redux";
 import { useState } from "react";
 import { message } from "antd";
+import { v4 as uuidv4 } from 'uuid';
 import { createUser} from "../../../redux/reducers";
 import { createUserData } from "../../../services/crud";
 import Button from "../../../components/Button";
@@ -22,8 +23,7 @@ const Register = ()=>{
         });
     };
 
-    const [userData, setUserData] = useState({
-        id: Math.round(Math.random() * 100),
+    const initialValues = {
         name: "",
         email: "",
         phoneNo: "",
@@ -34,7 +34,9 @@ const Register = ()=>{
             province: "",
             country: "Nepal"
         }
-    });
+    }
+
+    const [userData, setUserData] = useState(initialValues);
 
     const setFormData = (field_name, value)=>{
         setUserData({ ...userData,[field_name]: value});
@@ -52,15 +54,16 @@ const Register = ()=>{
     
     const submit = (event)=>{
         event.preventDefault();
+        const id_data = uuidv4();
         userSchema.validate(userData)
         .then(
             response=>{
                 console.log(response);
-                createUserData(userData);
-                dispatch(createUser(userData));
+                createUserData({...userData, id: id_data});
+                dispatch(createUser({...userData, id: id_data}));                  
+                setUserData(initialValues);
             })
         .catch(error=>openMessage("error", error.message));
-        
     }
     return (
         <div className="flex flex-1 flex-col items-center mt-2">
@@ -72,6 +75,7 @@ const Register = ()=>{
                     placeholder={"Enter your full name"}
                     id={"name"}
                     required={true}
+                    value={userData.name}
                     onChangeMethod={(event)=>setFormData("name", event.target.value)}
                 />
                 <Textfield
@@ -80,6 +84,7 @@ const Register = ()=>{
                     placeholder={"Enter your email"}
                     id={"email"}
                     required={true}
+                    value={userData.email}
                     onChangeMethod={(event)=>{setFormData("email", event.target.value)}}
                 />
                 <Textfield
@@ -88,6 +93,7 @@ const Register = ()=>{
                     placeholder={"Enter your phone number"}
                     id={"phoneNo"}
                     required={true}
+                    value={userData.phoneNo}
                     onChangeMethod={(event)=>{setFormData("phoneNo", event.target.value)}}
                 />
                 <Textfield
@@ -95,6 +101,7 @@ const Register = ()=>{
                     type={"date"}
                     id={"dob"}
                     required={false}
+                    value={userData.dob}
                     onChangeMethod={(event)=>{setFormData("dob", event.target.value)}}
                 />
                 <div className="m-2">
@@ -106,12 +113,14 @@ const Register = ()=>{
                             label={"City"} 
                             id={"city"} 
                             placeholder={"City Name"}
+                            value={userData.address.city}
                             onChangeMethod={(event)=>setAddressFormData("city",event.target.value)}
                         />
                         <LocationTextField 
                             label={"District"} 
                             id={"district"} 
                             placeholder={"District Name"}
+                            value={userData.address.district}
                             onChangeMethod={(event)=>setAddressFormData("district", event.target.value)}
                         />
                     </div>
@@ -120,6 +129,7 @@ const Register = ()=>{
                             label={"State"} 
                             id={"state"} 
                             placeholder={"--State"}
+                            value={userData.address.province}
                             onChangeMethod={(event)=>setAddressFormData("province",event.target.value)}
                         />
                         <LocationTextField 
