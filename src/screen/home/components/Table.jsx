@@ -1,6 +1,6 @@
 import { useDispatch } from "react-redux";
 import Button from "../../../components/Button";
-import { selectId } from "../../../redux/reducers";
+import { currentUser } from "../../../redux/reducers";
 import { useNavigate } from "react-router-dom";
 
 const Table = ({userData, deleteMethod})=>{
@@ -29,7 +29,6 @@ const Table = ({userData, deleteMethod})=>{
                                         bg_color={"bg-[#86efac]"}
                                         border_color={"border-[#10b981]"}
                                         method={()=>{
-                                            console.log(item)
                                             navigate('/edit', {state:item})
                                         }}
                                     />
@@ -38,7 +37,8 @@ const Table = ({userData, deleteMethod})=>{
                                         bg_color={"bg-[#f87171]"}
                                         border_color={"border-[#b91c1c]"}
                                         method={()=>{
-                                            dispatch(selectId({id:item.id, name:item.name}));
+                                            console.log(item.id)
+                                            dispatch(currentUser({id:item.id, name:item.name}));
                                             deleteMethod();
                                         }}
                                     />

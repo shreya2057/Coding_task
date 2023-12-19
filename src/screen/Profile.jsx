@@ -2,8 +2,6 @@ import NavBar from "../components/Navbar";
 import Card from "../components/Card";
 import { useLocation } from "react-router-dom";
 
-  
-
 const Profile = ()=>{
     const location = useLocation();
     const users = location.state;

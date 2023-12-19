@@ -5,6 +5,7 @@ import LocationTextField from "../../../components/LocationTextfield";
 import Textfield from "../../../components/Textfield";
 import { useState } from "react";
 import { createUser, user_reducer } from "../../../redux/reducers";
+import { createUserData } from "../../../services/crud";
 
 const Register = ()=>{
     const [name, setName] = useState("");
@@ -17,9 +18,8 @@ const Register = ()=>{
     const [country, setCountry] = useState("Nepal");
     const state = useSelector((state)=>state.user_reducer.user);
     const dispatch = useDispatch();
-    const submit = (event)=>{
+    const submit = async(event)=>{
         event.preventDefault();
-        const users = []
         const userData = {
             id: Math.round(Math.random() * 100),
             name: name,
@@ -33,20 +33,7 @@ const Register = ()=>{
                 country: country
             }
         };
-        const currentData = JSON.parse(localStorage.getItem("users"));
-        if(currentData !== null){
-            if(currentData.constructor === Array){
-                currentData.forEach((item)=>users.push(item));
-                users.push(userData);
-            } else{
-                users.push(currentData);
-                users.push(userData);
-            }
-            localStorage.setItem("users", JSON.stringify(users));
-        } else {
-            users.push(userData);
-            localStorage.setItem("users", JSON.stringify(users));
-        }
+        const users = await createUserData(userData);
         dispatch(createUser(userData));
     }
     return (

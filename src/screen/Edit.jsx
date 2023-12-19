@@ -7,7 +7,8 @@ import NavBar from "../components/Navbar";
 import Textfield from "../components/Textfield";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { createUser } from "../redux/reducers";
+import { updateUser } from "../redux/reducers";
+import { updateUserData } from "../services/crud";
 
 const Edit = ()=>{
     const navigate = useNavigate();
@@ -25,7 +26,6 @@ const Edit = ()=>{
    
     const submit = (event)=>{
         event.preventDefault();
-        const users = []
         const userData = {
             id: user.id,
             name: name,
@@ -39,13 +39,8 @@ const Edit = ()=>{
                 country: country
             }
         };
-        const currentData = JSON.parse(localStorage.getItem("users"));
-        console.log(currentData);
-        const updatedData = currentData.map(item=>item.id===user.id? userData : item)
-        console.log(updatedData);
-        localStorage.setItem("users", JSON.stringify(updatedData));
-        dispatch(createUser(userData));
-        console.log(name, email, phoneNo, dob, city, district, province, country);
+        const users = updateUserData(userData, user.id)
+        dispatch(updateUser(userData));
         navigate('/');
     }
     return (

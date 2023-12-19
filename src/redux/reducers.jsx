@@ -1,10 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initial_state = {
-    delete_id: null,
-    delete_name: null,
     user: [],
-    createdUser: []
+    createdUser: [],
+    deletedUser: [],
+    updatedUser:[],
+    currentUserData: {
+        id: null,
+        name: null,
+    }
 }
 
 export const user_reducer = createSlice({
@@ -15,11 +19,19 @@ export const user_reducer = createSlice({
             state.user.push(action.payload);
             state.createdUser.push(action.payload);
         },
-        selectId: (state, action) => {
-            state.delete_id = action.payload.id;
-            state.delete_name = action.payload.name;
-        }
+        currentUser: (state, action) => {
+            state.currentUserData.id = action.payload.id;
+            state.currentUserData.name = action.payload.name;
+        },
+        updateUser: (state, action) => {
+            state.user.push(action.payload);
+            state.updatedUser.push(action.payload);
+        },
+        deleteUser: (state, action) => {
+            state.user.push(action.payload);
+            state.deletedUser.push(action.payload);
+        },
     }
 })
 
-export const {createUser, selectId} = user_reducer.actions; 
+export const {createUser, currentUser, updateUser, deleteUser} = user_reducer.actions; 
