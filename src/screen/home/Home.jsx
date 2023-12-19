@@ -22,7 +22,7 @@ const Home = ()=>{
             <NavBar/>
             <div className="flex md:flex-row flex-col justify-between gap-4 md:gap-0">
                 <Register/>
-                <div className="flex flex-col items-end">
+                <div className="flex flex-col justify-center items-end">
                     <Table userData={users}/>
                     <div className="mx-12 my-3">
                         <Button 
