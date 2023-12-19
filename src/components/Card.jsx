@@ -33,9 +33,7 @@ const Card = ({userData})=>{
                         </span>
                     </p>
                 </div>
-                <div>
-                    <Button label={"Edit"} border_color={"border-[#a7f3d0]"} bg_color={"bg-[#d1fae5]"}/>
-                </div>
+                <Button label={"Edit"} border_color={"border-[#a7f3d0]"} bg_color={"bg-[#d1fae5]"}/>
             </div>
         </div>
     );
