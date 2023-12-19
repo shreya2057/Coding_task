@@ -43,10 +43,9 @@ const Register = ()=>{
                 users.push(userData);
             }
             localStorage.setItem("users", JSON.stringify(users));
-            console.log(JSON.parse(localStorage.getItem("users")));
         } else {
             users.push(userData);
-            localStorage.setItem("users", JSON.stringify(userData));
+            localStorage.setItem("users", JSON.stringify(users));
         }
         dispatch(createUser(userData));
     }

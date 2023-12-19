@@ -15,4 +15,7 @@
     .right_cell{
         @apply w-64 text-end px-4;
     }
+    .card_description_value{
+        @apply text-gray-700
+    }
 }
