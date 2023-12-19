@@ -1,9 +1,11 @@
 import { useDispatch } from "react-redux";
 import Button from "../../../components/Button";
 import { selectId } from "../../../redux/reducers";
+import { useNavigate } from "react-router-dom";
 
 const Table = ({userData, deleteMethod})=>{
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     return(
         <table className="flex flex-col my-2 mx-12 justify-center">
             
@@ -26,6 +28,10 @@ const Table = ({userData, deleteMethod})=>{
                                         label={"Edit"}
                                         bg_color={"bg-[#86efac]"}
                                         border_color={"border-[#10b981]"}
+                                        method={()=>{
+                                            console.log(item)
+                                            navigate('/edit', {state:item})
+                                        }}
                                     />
                                     <Button 
                                         label={"Delete"}

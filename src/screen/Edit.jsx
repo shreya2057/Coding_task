@@ -1,3 +1,4 @@
+import { useLocation, useNavigate } from "react-router-dom";
 import CoverImage from "../app-images/register.jpg";
 import Button from "../components/Button";
 import DropDown from "../components/DropDown";
@@ -5,19 +6,47 @@ import LocationTextField from "../components/LocationTextfield";
 import NavBar from "../components/Navbar";
 import Textfield from "../components/Textfield";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { createUser } from "../redux/reducers";
 
 const Edit = ()=>{
-    const [name, setName] = useState("");
-    const [email, setEmail] = useState("");
-    const [phoneNo, setPhoneNo] = useState("");
-    const [dob, setDOB] = useState("");
-    const [city, setCity] = useState("");
-    const [district, setDistrict] = useState("");
-    const [province, setProvince] = useState("");
-    const [country, setCountry] = useState("Nepal")
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const location = useLocation();
+    const user = location.state;
+    const [name, setName] = useState(user.name);
+    const [email, setEmail] = useState(user.email);
+    const [phoneNo, setPhoneNo] = useState(user.phoneNo);
+    const [dob, setDOB] = useState(user.dob);
+    const [city, setCity] = useState(user.address.city);
+    const [district, setDistrict] = useState(user.address.district);
+    const [province, setProvince] = useState(user.address.province);
+    const [country, setCountry] = useState(user.address.country)
+   
     const submit = (event)=>{
         event.preventDefault();
+        const users = []
+        const userData = {
+            id: user.id,
+            name: name,
+            email: email, 
+            phoneNo: phoneNo,
+            dob: dob,
+            address: {
+                city: city,
+                district: district,
+                province: province,
+                country: country
+            }
+        };
+        const currentData = JSON.parse(localStorage.getItem("users"));
+        console.log(currentData);
+        const updatedData = currentData.map(item=>item.id===user.id? userData : item)
+        console.log(updatedData);
+        localStorage.setItem("users", JSON.stringify(updatedData));
+        dispatch(createUser(userData));
         console.log(name, email, phoneNo, dob, city, district, province, country);
+        navigate('/');
     }
     return (
         <div className="flex flex-col h-screen">
@@ -33,6 +62,7 @@ const Edit = ()=>{
                         id={"name"}
                         required={true}
                         onChangeMethod={(event)=>{setName(event.target.value)}}
+                        value={name}
                     />
                     <Textfield
                         label={"Email"}
@@ -41,6 +71,7 @@ const Edit = ()=>{
                         id={"email"}
                         required={true}
                         onChangeMethod={(event)=>{setEmail(event.target.value)}}
+                        value={email}
                     />
                     <Textfield
                         label={"Phone Number"}
@@ -48,6 +79,7 @@ const Edit = ()=>{
                         placeholder={"Enter your phone number"}
                         id={"phoneNo"}
                         required={true}
+                        value={phoneNo}
                         onChangeMethod={(event)=>{setPhoneNo(event.target.value)}}
                     />
                     <Textfield
@@ -55,6 +87,7 @@ const Edit = ()=>{
                         type={"date"}
                         id={"dob"}
                         required={false}
+                        value={dob}
                         onChangeMethod={(event)=>{setDOB(event.target.value)}}
                     />
                     <div className="m-2">
@@ -66,11 +99,13 @@ const Edit = ()=>{
                                 label={"City"} 
                                 id={"city"} 
                                 placeholder={"City Name"}
+                                value={city}
                                 onChangeMethod={(event)=>setCity(event.target.value)}
                             />
                             <LocationTextField 
                                 label={"District"} 
                                 id={"district"} 
+                                value={district}
                                 placeholder={"District Name"}
                                 onChangeMethod={(event)=>setDistrict(event.target.value)}
                             />
@@ -80,6 +115,7 @@ const Edit = ()=>{
                                 label={"State"} 
                                 id={"state"} 
                                 placeholder={"--State"}
+                                value={province}
                                 onChangeMethod={(event)=>setProvince(event.target.value)}
                             />
                             <LocationTextField 
@@ -91,10 +127,14 @@ const Edit = ()=>{
                             />
                         </div>
                     </div>
-                    <Button 
-                        label={"Update"} 
-                        method={(event)=>submit(event)}
-                    />
+                    <div className="flex w-full justify-center my-2">
+                        <Button 
+                            label={"Update"} 
+                            method={(event)=>submit(event)}
+                            bg_color={"bg-[#86efac]"}
+                            border_color={"border-[#10b981]"}
+                        />
+                    </div>
                 </form>
            </div>
         </div>
