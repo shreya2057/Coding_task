@@ -1,10 +1,10 @@
 import { useDispatch, useSelector } from "react-redux";
-import Button from "../components/Button";
-import DropDown from "../components/DropDown";
-import LocationTextField from "../components/LocationTextfield";
-import Textfield from "../components/Textfield";
+import Button from "../../../components/Button";
+import DropDown from "../../../components/DropDown";
+import LocationTextField from "../../../components/LocationTextfield";
+import Textfield from "../../../components/Textfield";
 import { useState } from "react";
-import { createUser, user_reducer } from "../redux/reducers";
+import { createUser, user_reducer } from "../../../redux/reducers";
 
 const Register = ()=>{
     const [name, setName] = useState("");
