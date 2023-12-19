@@ -17,7 +17,6 @@ const Profile = ()=>{
                     &&
                     users.map((item, key)=><Card key={key} userData={item}/>)
                 }
-                {/* <Card/> */}
             </div>
         </>
     );

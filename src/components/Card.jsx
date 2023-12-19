@@ -1,6 +1,8 @@
+import { useNavigate } from "react-router-dom";
 import Button from "./Button";
 
 const Card = ({userData})=>{
+    const navigate = useNavigate();
     return(
         <div className="border border-gray-300 rounded-sm text-sm m-3">
             <div className="py-1 px-2 font-bold bg-[#bbf7d0]">
@@ -33,7 +35,14 @@ const Card = ({userData})=>{
                         </span>
                     </p>
                 </div>
-                <Button label={"Edit"} border_color={"border-[#a7f3d0]"} bg_color={"bg-[#d1fae5]"}/>
+                <Button 
+                    label={"Edit"} 
+                    border_color={"border-[#a7f3d0]"} 
+                    bg_color={"bg-[#d1fae5]"}
+                    method={()=>{
+                        navigate('/edit', {state:userData})
+                    }}
+                />
             </div>
         </div>
     );
