@@ -1,6 +1,9 @@
+import { useDispatch } from "react-redux";
 import Button from "../../../components/Button";
+import { selectId } from "../../../redux/reducers";
 
-const Table = ({userData})=>{
+const Table = ({userData, deleteMethod})=>{
+    const dispatch = useDispatch();
     return(
         <table className="flex flex-col my-2 mx-12 justify-center">
             
@@ -28,6 +31,10 @@ const Table = ({userData})=>{
                                         label={"Delete"}
                                         bg_color={"bg-[#f87171]"}
                                         border_color={"border-[#b91c1c]"}
+                                        method={()=>{
+                                            dispatch(selectId({id:item.id, name:item.name}));
+                                            deleteMethod();
+                                        }}
                                     />
                                 </div>
                             </td>
