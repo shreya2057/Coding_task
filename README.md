@@ -59,8 +59,8 @@ $ npm run dev
 <div align="center">
   <img src="src/app-images/validation.jpg" width=800/>
   <span>
-        <img src="src/app-images/berforesorting.jpg" width=400 />
-        <img src="src/app-images/aftersorting.jpg" width=400 />
+        <img src="src/app-images/berforesorting.jpg" width=400 height=200/>
+        <img src="src/app-images/aftersorting.jpg" width=400 height=200/>
   </span>
 </div>
 
