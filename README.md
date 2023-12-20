@@ -62,5 +62,7 @@ $ npm run dev
         <img src="src/app-images/berforesorting.jpg" width=400 height=200/>
         <img src="src/app-images/aftersorting.jpg" width=400 height=200/>
   </span>
+  <img src="src/app-images/profiles.jpg" width=800/>
+  <img src="src/app-images/delete.jpg" width=800/>
 </div>
 
