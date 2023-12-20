@@ -60,7 +60,7 @@ $ npm run dev
   <img src="src/app-images/validation.jpg" width=800/>
   <span>
         <img src="src/app-images/berforesorting.jpg" width=400 />
-        <img src="src/app-images/berforesorting.jpg" width=400 />
+        <img src="src/app-images/aftersorting.jpg" width=400 />
   </span>
 </div>
 
