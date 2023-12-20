@@ -57,10 +57,10 @@ $ npm run dev
 ## Screenshots 
 
 <div align="center">
-  <img src="src/app-images/validation.jpg" height=450 />
+  <img src="src/app-images/validation.jpg" width=800/>
   <span>
-        <img src="src/app-images/berforesorting.jpg" width=390 />
-        <img src="src/app-images/berforesorting.jpg" width=390 />
+        <img src="src/app-images/berforesorting.jpg" width=400 />
+        <img src="src/app-images/berforesorting.jpg" width=400 />
   </span>
 </div>
 
